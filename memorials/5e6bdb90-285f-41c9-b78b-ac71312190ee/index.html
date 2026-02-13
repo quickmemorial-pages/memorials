@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>In Loving Memory of Hello Man</title>
+  <meta name="description" content="A permanent memorial tribute to Hello Man. Share memories, photos, and light a candle.">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="In Loving Memory of Hello Man">
+  <meta property="og:description" content="January 6, 2026 - February 4, 2026. A permanent tribute.">
+  <meta property="og:type" content="website">
+  
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-900: #102a43;
+      --primary-800: #243b53;
+      --primary-700: #334e68;
+      --warm-50: #fefcf8;
+      --warm-100: #fdf8ed;
+      --warm-200: #faefd7;
+      --warm-300: #f5e6c0;
+      --warm-500: #d4b483;
+      --warm-600: #c49a5c;
+      --warm-900: #6e4f2a;
+      --white: #ffffff;
+    }
+
+    /* Reset & Base */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--warm-50);
+      background-image: linear-gradient(to bottom, var(--warm-50), var(--warm-100));
+      color: var(--primary-800);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-900);
+    }
+
+    /* Layout */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    .memorial-card {
+      background: var(--white);
+      border-radius: 24px;
+      box-shadow: 0 10px 40px -10px rgba(166, 124, 66, 0.1);
+      padding: 40px;
+      border: 1px solid rgba(250, 239, 215, 0.6);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative elements */
+    .memorial-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(to right, var(--warm-300), var(--warm-500), var(--warm-300));
+    }
+
+    /* Header */
+    .main-photo-container {
+      margin: -20px auto 32px;
+      width: 200px;
+      height: 200px;
+      position: relative;
+    }
+
+    .main-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 6px solid var(--white);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    .main-photo-placeholder {
+      width: 120px;
+      height: 120px;
+      background: var(--warm-100);
+      border-radius: 50%;
+      margin: 0 auto 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .dates {
+      font-size: 1.1rem;
+      color: var(--warm-600);
+      font-weight: 500;
+      margin-bottom: 32px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+    }
+
+    .divider {
+      width: 80px;
+      height: 2px;
+      background: var(--warm-200);
+      margin: 0 auto 40px;
+      border: none;
+    }
+
+    /* Content */
+    .biography {
+      text-align: left;
+      font-size: 1.05rem;
+      color: var(--primary-700);
+      white-space: pre-wrap;
+      margin-bottom: 48px;
+    }
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+
+    .photo-wrapper {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
+    }
+
+    .photo-wrapper:hover {
+      transform: translateY(-2px);
+    }
+
+    .photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Candle Section */
+    .candle-section {
+      background: var(--warm-50);
+      border-radius: 16px;
+      padding: 32px;
+      margin-top: 48px;
+    }
+
+    .candle-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 16px;
+      animation: flicker 3s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(0.95); }
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .candle-count {
+      color: var(--warm-900);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+
+    /* Form Elements */
+    input, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--warm-300);
+      border-radius: 12px;
+      font-family: inherit;
+      margin-bottom: 12px;
+      background: var(--white);
+      transition: border-color 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--warm-500);
+      box-shadow: 0 0 0 3px rgba(212, 180, 131, 0.2);
+    }
+
+    .btn {
+      background: var(--primary-900);
+      color: var(--white);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background: var(--primary-800);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .candle-form-container {
+      max-width: 400px;
+      margin: 0 auto;
+      display: none;
+    }
+    
+    .candle-form-container.active { display: block; }
+    .btn-hidden { display: none; }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.85rem;
+      color: var(--warm-600);
+    }
+    
+    .footer a {
+      color: var(--primary-700);
+      text-decoration: none;
+    }
+    
+    .footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px 16px 60px; }
+      .memorial-card { padding: 32px 20px; }
+      h1 { font-size: 2rem; }
+      .main-photo-container { width: 160px; height: 160px; }
+      .candle-section { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="memorial-card">
+      <header>
+        <div class="main-photo-placeholder"></div>
+        <h1>Hello Man</h1>
+        <div class="dates">January 6, 2026 &mdash; February 4, 2026</div>
+      </header>
+
+      
+
+      
+
+      <div class="candle-section">
+        <span class="candle-icon">🕯️</span>
+        <h2>Light a Candle</h2>
+        <p class="candle-count">
+          <span id="count">0</span> people have lit a candle in remembrance
+        </p>
+        
+        <button id="show-form-btn" class="btn" onclick="toggleForm()">Light a Candle</button>
+        
+        <div id="candle-form" class="candle-form-container">
+          <input type="text" id="name" placeholder="Your Name" maxlength="50" />
+          <textarea id="message" rows="3" placeholder="Share a brief message (optional)" maxlength="200"></textarea>
+          <button id="submit-btn" class="btn" onclick="submitCandle()">Light Candle</button>
+          <button class="btn" style="background: transparent; color: var(--primary-700); margin-top: 8px;" onclick="toggleForm()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+             <a href="https://quickmemorial.com" target="_blank" rel="noopener">Permanently hosted by QuickMemorial</a>
+           </footer>
+  </div>
+
+  <script>
+    // In production, this would hit the API
+    const API_URL = 'https://www.quickmemorial.com/api/candles/5e6bdb90-285f-41c9-b78b-ac71312190ee';
+    
+    function toggleForm() {
+      const form = document.getElementById('candle-form');
+      const btn = document.getElementById('show-form-btn');
+      
+      if (form.style.display === 'block') {
+        form.style.display = 'none';
+        btn.style.display = 'inline-block';
+      } else {
+        form.style.display = 'block';
+        btn.style.display = 'none';
+        document.getElementById('name').focus();
+      }
+    }
+
+    async function submitCandle() {
+      const btn = document.getElementById('submit-btn');
+      const nameCtx = document.getElementById('name');
+      const msgCtx = document.getElementById('message');
+      
+      const name = nameCtx.value.trim() || 'Anonymous';
+      const message = msgCtx.value.trim();
+      
+      btn.innerText = 'Lighting...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(API_URL, { 
+          method: 'POST', 
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lighter_name: name, message }) 
+        });
+        
+        const data = await res.json();
+        
+        if (data.success) {
+          const countSpan = document.getElementById('count');
+          countSpan.innerText = data.count || 1;
+          
+          nameCtx.value = '';
+          msgCtx.value = '';
+          
+          btn.innerText = 'Candle Lit ✨';
+          
+          setTimeout(() => {
+            toggleForm();
+            btn.innerText = 'Light Candle';
+            btn.disabled = false;
+          }, 1500);
+        } else {
+          throw new Error('Failed');
+        }
+
+      } catch (e) {
+        btn.innerText = 'Error';
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.innerText = 'Light Candle';
+        }, 2000);
+      }
+    }
+
+    // Load initial count
+    fetch(API_URL)
+      .then(r => r.json())
+      .then(data => {
+        if(data.count) {
+          document.getElementById('count').innerText = data.count;
+        }
+      })
+      .catch(e => console.error(e));
+  </script>
+</body>
+</html>
