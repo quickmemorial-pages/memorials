@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>In Loving Memory of Wendy Snutts</title>
+  <meta name="description" content="A permanent memorial tribute to Wendy Snutts. Share memories, photos, and light a candle.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="In Loving Memory of Wendy Snutts">
+  <meta property="og:description" content="April 20, 1969 - April 20, 2025. A permanent tribute.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="./photos/0.jpg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-900: #102a43;
+      --primary-800: #243b53;
+      --primary-700: #334e68;
+      --warm-50: #fefcf8;
+      --warm-100: #fdf8ed;
+      --warm-200: #faefd7;
+      --warm-300: #f5e6c0;
+      --warm-500: #d4b483;
+      --warm-600: #c49a5c;
+      --warm-900: #6e4f2a;
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--warm-50);
+      background-image: linear-gradient(to bottom, var(--warm-50), var(--warm-100));
+      color: var(--primary-800);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-900);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    .memorial-card {
+      background: var(--white);
+      border-radius: 24px;
+      box-shadow: 0 10px 40px -10px rgba(166, 124, 66, 0.1);
+      padding: 40px;
+      border: 1px solid rgba(250, 239, 215, 0.6);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .memorial-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(to right, var(--warm-300), var(--warm-500), var(--warm-300));
+    }
+
+    .main-photo-container {
+      margin: -20px auto 32px;
+      width: 200px;
+      height: 200px;
+      position: relative;
+    }
+
+    .main-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 6px solid var(--white);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    .main-photo-placeholder {
+      width: 120px;
+      height: 120px;
+      background: var(--warm-100);
+      border-radius: 50%;
+      margin: 0 auto 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .dates {
+      font-size: 1.1rem;
+      color: var(--warm-600);
+      font-weight: 500;
+      margin-bottom: 32px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+    }
+
+    .divider {
+      width: 80px;
+      height: 2px;
+      background: var(--warm-200);
+      margin: 0 auto 40px;
+      border: none;
+    }
+
+    .biography {
+      text-align: left;
+      font-size: 1.05rem;
+      color: var(--primary-700);
+      white-space: pre-wrap;
+      margin-bottom: 48px;
+    }
+
+    .gallery {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 56px;
+    }
+
+    .gallery-single {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .gallery-single .photo-wrapper {
+      aspect-ratio: auto;
+    }
+
+    .gallery-single .photo-wrapper img {
+      height: auto;
+      max-height: 500px;
+    }
+
+    .gallery-multi {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .photo-wrapper {
+      aspect-ratio: 3 / 4;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .photo-wrapper:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    .photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .photo-wrapper:hover img {
+      transform: scale(1.03);
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(16, 42, 67, 0.92);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 20px;
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      object-fit: contain;
+    }
+
+    .candle-section {
+      background: var(--warm-50);
+      border-radius: 16px;
+      padding: 32px;
+      margin-top: 48px;
+    }
+
+    .candle-container-center {
+      text-align: center;
+      margin-bottom: 24px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .css-candle {
+      width: 32px;
+      height: 48px;
+      background: linear-gradient(#faefd7, #e8d0a9);
+      border-radius: 4px;
+      position: relative;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .css-candle::before {
+      content: "";
+      position: absolute;
+      top: -12px;
+      left: 14px;
+      width: 4px;
+      height: 12px;
+      background: #594a36;
+      border-radius: 2px;
+    }
+
+    .css-flame {
+      width: 14px;
+      height: 24px;
+      background: radial-gradient(ellipse at bottom, #ffeb3b, #ff9800);
+      border-radius: 50% 50% 35% 35%;
+      position: absolute;
+      top: -26px;
+      left: 9px;
+      animation: flicker 1.8s infinite ease-in-out alternate;
+      box-shadow: 0 0 10px rgba(255, 152, 0, 0.6), 0 0 20px rgba(255, 235, 59, 0.4);
+      transform-origin: bottom center;
+    }
+
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+      20% { transform: scale(1.1) rotate(2deg); opacity: 1; }
+      40% { transform: scale(0.95) rotate(-1deg); opacity: 0.8; }
+      60% { transform: scale(1.05) rotate(1deg); opacity: 1; }
+      80% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+      100% { transform: scale(0.98) rotate(2deg); opacity: 0.85; }
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .candle-count {
+      color: var(--warm-900);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--warm-300);
+      border-radius: 12px;
+      font-family: inherit;
+      margin-bottom: 12px;
+      background: var(--white);
+      transition: border-color 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--warm-500);
+      box-shadow: 0 0 0 3px rgba(212, 180, 131, 0.2);
+    }
+
+    .btn {
+      background: var(--primary-900);
+      color: var(--white);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      width: 100%;
+    }
+
+    .btn:hover { background: var(--primary-800); }
+    .btn:active { transform: scale(0.98); }
+
+    .candle-form-container {
+      max-width: 400px;
+      margin: 0 auto;
+      display: none;
+    }
+
+    .candle-form-container.active { display: block; }
+
+    .candle-messages {
+      margin-top: 28px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .candle-messages-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--primary-900);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .candle-entry {
+      background: var(--white);
+      border: 1px solid var(--warm-200);
+      border-left: 3px solid var(--warm-500);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      text-align: left;
+      animation: fadeIn 0.4s ease-out;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .candle-entry:hover {
+      transform: translateX(2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+
+    .candle-entry-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .candle-entry-icon {
+      font-size: 0.85rem;
+      line-height: 1;
+    }
+
+    .candle-entry-name {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--primary-900);
+    }
+
+    .candle-entry-time {
+      font-size: 0.75rem;
+      color: var(--warm-600);
+      margin-left: auto;
+    }
+
+    .candle-entry-message {
+      font-size: 0.9rem;
+      color: var(--primary-700);
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .candle-entry-notext {
+      font-size: 0.85rem;
+      color: var(--warm-500);
+      font-style: italic;
+    }
+
+    /* Guestbook Styles */
+    .guestbook-section {
+      margin-top: 60px;
+      text-align: left;
+    }
+
+    .guestbook-subtitle {
+      color: var(--warm-600);
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+
+    .guestbook-form {
+      background: var(--warm-50);
+      padding: 24px;
+      border-radius: 16px;
+      margin-bottom: 40px;
+      border: 1px solid var(--warm-200);
+    }
+
+    .textarea-wrapper {
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .guestbook-form textarea {
+      resize: vertical;
+      min-height: 100px;
+      margin-bottom: 4px;
+    }
+
+    .char-count {
+      font-size: 0.75rem;
+      color: var(--warm-500);
+      text-align: right;
+      display: block;
+    }
+
+    .guestbook-entry {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      border: 1px solid var(--warm-100);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      position: relative;
+    }
+   
+    .guestbook-entry::before {
+      content: "❝";
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      font-size: 3rem;
+      color: var(--warm-100);
+      font-family: serif;
+      line-height: 1;
+      z-index: 0;
+    }
+
+    .gb-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .gb-author {
+      font-weight: 700;
+      color: var(--primary-900);
+      font-size: 0.95rem;
+    }
+
+    .gb-date {
+      font-size: 0.8rem;
+      color: var(--warm-500);
+    }
+
+    .gb-message {
+      color: var(--primary-800);
+      line-height: 1.6;
+      font-size: 0.95rem;
+      position: relative;
+      z-index: 1;
+      white-space: pre-wrap;
+    }
+
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.85rem;
+      color: var(--warm-600);
+    }
+
+    .footer a {
+      color: var(--primary-700);
+      text-decoration: none;
+    }
+
+    .footer a:hover { text-decoration: underline; }
+
+    /* Password Gate */
+    .password-gate {
+      text-align: center;
+      padding: 60px 24px;
+    }
+
+    .password-gate .lock-icon {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+
+    .password-gate h2 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .password-gate .subtitle {
+      color: var(--warm-600);
+      font-size: 0.95rem;
+      margin-bottom: 32px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+    }
+
+    .password-gate .pw-form {
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .password-gate .pw-error {
+      color: #c53030;
+      font-size: 0.85rem;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .memorial-content {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (min-width: 600px) {
+      .gallery-multi {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px 12px 60px; }
+      .memorial-card { padding: 28px 16px; }
+      h1 { font-size: 1.75rem; }
+      .main-photo-container { width: 140px; height: 140px; }
+      .main-photo { border-width: 4px; }
+      .dates { font-size: 0.95rem; }
+      .biography { font-size: 0.95rem; }
+      .candle-section { padding: 24px 16px; }
+      .gallery-single .photo-wrapper img { max-height: 350px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="memorial-card">
+      
+      <div id="memorial-content" class="memorial-content">
+        
+      <header>
+        <div class="main-photo-container">
+           <img src="./photos/0.jpg" alt="Wendy Snutts" class="main-photo" />
+         </div>
+        <h1>Wendy Snutts</h1>
+        <div class="dates">April 20, 1969 &mdash; April 20, 2025</div>
+      </header>
+
+      <hr class="divider" /><div class="biography">I remember when I first came upon Wendy. She definitely left an impression</div>
+
+      <div class="gallery gallery-single"><div class="photo-wrapper" onclick="openLightbox('./photos/0.jpg')">
+              <img src="./photos/0.jpg" alt="Photo 1 of Wendy Snutts" loading="lazy" />
+            </div></div>
+
+      <div class="candle-section">
+        <div class="candle-container-center">
+          <div class="css-candle">
+            <div class="css-flame"></div>
+          </div>
+        </div>
+
+        <h2>Light a Candle</h2>
+        <p class="candle-count">
+          <span id="count">0</span> people have lit a candle in remembrance
+        </p>
+
+        <button id="show-form-btn" class="btn" onclick="toggleForm()">Light a Candle</button>
+
+        <div id="candle-form" class="candle-form-container">
+          <input type="text" id="name" placeholder="Your Name" maxlength="50" />
+          <textarea id="message" rows="3" placeholder="Share a brief message (optional)" maxlength="200"></textarea>
+          <button id="submit-btn" class="btn" onclick="submitCandle()">Light Candle</button>
+          <button class="btn" style="background: transparent; color: var(--primary-700); margin-top: 8px;" onclick="toggleForm()">Cancel</button>
+        </div>
+
+        <div id="candle-messages" class="candle-messages"></div>
+      </div>
+
+      <div class="guestbook-section">
+        <h2>📝 Guestbook</h2>
+        <p class="guestbook-subtitle">Share a memory or message of love</p>
+
+        <div id="gb-form" class="guestbook-form">
+          <input type="text" id="gb-name" placeholder="Your Name" maxlength="100" />
+          <div class="textarea-wrapper">
+            <textarea id="gb-message" rows="4" placeholder="Write a memory, a story, or a message for the family..." maxlength="2000" oninput="updateCharCount()"></textarea>
+            <span id="gb-char-count" class="char-count">0 / 2,000</span>
+          </div>
+          <button id="gb-submit" class="btn" onclick="submitGuestbook()">Leave a Message</button>
+        </div>
+
+        <div id="gb-entries" class="guestbook-entries"></div>
+        <div id="gb-load-more-wrap" style="text-align:center;margin-top:16px;display:none;">
+          <button id="gb-load-more" class="btn" style="background:var(--warm-50);color:var(--primary-800);border:1px solid var(--warm-300);width:auto;padding:10px 28px;" onclick="loadMoreGuestbook()">Load More</button>
+        </div>
+      </div>
+      </div>
+      
+    </div>
+
+    <footer class="footer">
+             <a href="https://quickmemorial.com" target="_blank" rel="noopener">Permanently hosted by QuickMemorial</a>
+           </footer>
+  </div>
+
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Full size photo" />
+  </div>
+
+  <script>
+    
+
+    // ── Lightbox ──────────────────────────────────────────
+    function openLightbox(src) {
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // ── Candle API ────────────────────────────────────────
+    const API_URL = 'https://www.quickmemorial.com/api/candles/b8406491-4063-46ba-af8b-ed6819142d11';
+
+    function toggleForm() {
+      const form = document.getElementById('candle-form');
+      const btn = document.getElementById('show-form-btn');
+      
+      form.classList.toggle('active');
+      
+      if (form.classList.contains('active')) {
+        btn.style.display = 'none';
+        document.getElementById('name').focus();
+      } else {
+        btn.style.display = 'inline-block';
+      }
+    }
+
+    async function submitCandle() {
+      const btn = document.getElementById('submit-btn');
+      const nameCtx = document.getElementById('name');
+      const msgCtx = document.getElementById('message');
+
+      const name = nameCtx.value.trim() || 'Anonymous';
+      const message = msgCtx.value.trim();
+
+      btn.innerText = 'Lighting...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lighter_name: name, message })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          const countSpan = document.getElementById('count');
+          countSpan.innerText = data.count || 1;
+
+          // Add the new candle to the list immediately
+          prependCandle(name, message);
+
+          nameCtx.value = '';
+          msgCtx.value = '';
+
+          btn.innerText = 'Candle Lit ✨';
+
+          setTimeout(() => {
+            toggleForm();
+            btn.innerText = 'Light Candle';
+            btn.disabled = false;
+          }, 1500);
+        } else {
+          throw new Error('Failed');
+        }
+
+      } catch (e) {
+        btn.innerText = 'Error';
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.innerText = 'Light Candle';
+        }, 2000);
+      }
+    }
+
+    function timeAgo(dateStr) {
+      const now = new Date();
+      const d = new Date(dateStr);
+      const diff = Math.floor((now - d) / 1000);
+      if (diff < 60) return 'just now';
+      if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+      if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+      if (diff < 2592000) return Math.floor(diff / 86400) + 'd ago';
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    function escText(s) {
+      const el = document.createElement('span');
+      el.textContent = s;
+      return el.innerHTML;
+    }
+
+    function renderCandle(c) {
+      const name = escText(c.lighter_name || 'Anonymous');
+      const time = timeAgo(c.created_at);
+      const msg = c.message
+        ? '<p class="candle-entry-message">' + escText(c.message) + '</p>'
+        : '<p class="candle-entry-notext">lit a candle</p>';
+      return '<div class="candle-entry">'
+        + '<div class="candle-entry-header">'
+        + '<span class="candle-entry-icon">🕯️</span>'
+        + '<span class="candle-entry-name">' + name + '</span>'
+        + '<span class="candle-entry-time">' + time + '</span>'
+        + '</div>'
+        + msg
+        + '</div>';
+    }
+
+    function renderCandles(candles) {
+      const container = document.getElementById('candle-messages');
+      if (!candles || candles.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+      container.innerHTML = '<h3 class="candle-messages-title">Messages of Remembrance</h3>'
+        + candles.map(renderCandle).join('');
+    }
+
+    function prependCandle(name, message) {
+      const container = document.getElementById('candle-messages');
+      const c = { lighter_name: name, message: message, created_at: new Date().toISOString() };
+      const html = renderCandle(c);
+      // Add title if first entry
+      if (!container.querySelector('.candle-messages-title')) {
+        container.innerHTML = '<h3 class="candle-messages-title">Messages of Remembrance</h3>';
+      }
+      const title = container.querySelector('.candle-messages-title');
+      title.insertAdjacentHTML('afterend', html);
+    }
+
+    // ── Guestbook API ─────────────────────────────────────
+    const GB_API_URL = 'https://www.quickmemorial.com/api/guestbook/b8406491-4063-46ba-af8b-ed6819142d11';
+    let gbPage = 1;
+    let gbLoading = false;
+
+    function updateCharCount() {
+      const el = document.getElementById('gb-message');
+      const count = document.getElementById('gb-char-count');
+      const len = el.value.length;
+      count.innerText = len + ' / 2,000';
+      if (len > 2000) count.style.color = 'red';
+      else count.style.color = '';
+    }
+
+    function renderGuestbookEntry(entry) {
+      if (!entry) return '';
+      const name = escText(entry.author_name);
+      const msg = escText(entry.message);
+      const date = new Date(entry.created_at).toLocaleDateString('en-US', {
+        year: 'numeric', month: 'long', day: 'numeric'
+      });
+      return '<div class="guestbook-entry">' +
+        '<div class="gb-header">' +
+          '<span class="gb-author">' + name + '</span>' +
+          '<span class="gb-date">' + date + '</span>' +
+        '</div>' +
+        '<div class="gb-message">' + msg + '</div>' +
+      '</div>';
+    }
+
+    async function loadGuestbook(page = 1) {
+      if (gbLoading) return;
+      gbLoading = true;
+      const btn = document.getElementById('gb-load-more');
+      if (btn) btn.innerHTML = 'Loading...';
+
+      try {
+        const res = await fetch(GB_API_URL + '?page=' + page);
+        const data = await res.json();
+        
+        if (data.entries && data.entries.length > 0) {
+          const html = data.entries.map(renderGuestbookEntry).join('');
+          const container = document.getElementById('gb-entries');
+          
+          if (page === 1) container.innerHTML = html;
+          else container.insertAdjacentHTML('beforeend', html);
+
+          // Show/hide load more button
+          const totalLoaded = page * data.pageSize;
+          const wrap = document.getElementById('gb-load-more-wrap');
+          if (data.total > totalLoaded) {
+            wrap.style.display = 'block';
+            gbPage = page;
+          } else {
+            wrap.style.display = 'none';
+          }
+        } else if (page === 1) {
+          document.getElementById('gb-entries').innerHTML = 
+            '<p style="text-align:center;color:var(--warm-500);font-style:italic;padding:20px;">No messages yet. Be the first to share a memory.</p>';
+          document.getElementById('gb-load-more-wrap').style.display = 'none';
+        }
+      } catch (e) {
+        console.error('Failed to load guestbook', e);
+      } finally {
+        gbLoading = false;
+        if (btn) btn.innerHTML = 'Load More';
+      }
+    }
+
+    function loadMoreGuestbook() {
+      loadGuestbook(gbPage + 1);
+    }
+
+    async function submitGuestbook() {
+      const nameEl = document.getElementById('gb-name');
+      const msgEl = document.getElementById('gb-message');
+      const btn = document.getElementById('gb-submit');
+
+      const name = nameEl.value.trim();
+      const message = msgEl.value.trim();
+
+      if (!name || !message) {
+        alert('Please enter your name and a message.');
+        return;
+      }
+      
+      if (message.length > 2000) {
+        alert('Message is too long (max 2,000 characters).');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerText = 'Posting...';
+
+      try {
+        const res = await fetch(GB_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ author_name: name, message })
+        });
+        
+        const data = await res.json();
+        
+        if (data.success) {
+          nameEl.value = '';
+          msgEl.value = '';
+          updateCharCount();
+          
+          btn.innerText = 'Message Posted';
+          
+          // Reload page 1 to show new message
+          await loadGuestbook(1);
+          
+          setTimeout(() => {
+            btn.disabled = false;
+            btn.innerText = 'Leave a Message';
+          }, 2000);
+        } else {
+          alert('Error: ' + (data.error || 'Failed to post message'));
+          btn.disabled = false;
+          btn.innerText = 'Leave a Message';
+        }
+      } catch (e) {
+        alert('Failed to connect. Please try again.');
+        btn.disabled = false;
+        btn.innerText = 'Leave a Message';
+      }
+    }
+
+    // Load initial candles
+    function loadCandleCount() {
+      fetch(API_URL)
+        .then(r => r.json())
+        .then(data => {
+          if(data.count) {
+            document.getElementById('count').innerText = data.count;
+          }
+          if(data.candles) {
+            renderCandles(data.candles);
+          }
+        })
+        .catch(e => console.error(e));
+      
+      // Also load guestbook
+      loadGuestbook(1);
+    }
+
+    loadCandleCount();
+  </script>
+</body>
+</html>
