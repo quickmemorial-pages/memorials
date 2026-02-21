@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>In Loving Memory of Bella</title>
+  <meta name="description" content="This is a private, password-protected memorial.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="In Loving Memory of Bella">
+  <meta property="og:description" content="This memorial is password protected.">
+  <meta property="og:type" content="website">
+  
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-900: #102a43;
+      --primary-800: #243b53;
+      --primary-700: #334e68;
+      --warm-50: #fefcf8;
+      --warm-100: #fdf8ed;
+      --warm-200: #faefd7;
+      --warm-300: #f5e6c0;
+      --warm-500: #d4b483;
+      --warm-600: #c49a5c;
+      --warm-900: #6e4f2a;
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--warm-50);
+      background-image: linear-gradient(to bottom, var(--warm-50), var(--warm-100));
+      color: var(--primary-800);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-900);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    .memorial-card {
+      background: var(--white);
+      border-radius: 24px;
+      box-shadow: 0 10px 40px -10px rgba(166, 124, 66, 0.1);
+      padding: 40px;
+      border: 1px solid rgba(250, 239, 215, 0.6);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .memorial-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(to right, var(--warm-300), var(--warm-500), var(--warm-300));
+    }
+
+    .main-photo-container {
+      margin: -20px auto 32px;
+      width: 200px;
+      height: 200px;
+      position: relative;
+    }
+
+    .main-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 6px solid var(--white);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    .main-photo-placeholder {
+      width: 120px;
+      height: 120px;
+      background: var(--warm-100);
+      border-radius: 50%;
+      margin: 0 auto 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .dates {
+      font-size: 1.1rem;
+      color: var(--warm-600);
+      font-weight: 500;
+      margin-bottom: 32px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+    }
+
+    .divider {
+      width: 80px;
+      height: 2px;
+      background: var(--warm-200);
+      margin: 0 auto 40px;
+      border: none;
+    }
+
+    .biography {
+      text-align: left;
+      font-size: 1.05rem;
+      color: var(--primary-700);
+      white-space: pre-wrap;
+      margin-bottom: 48px;
+    }
+
+    .gallery {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 56px;
+    }
+
+    .gallery-single {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .gallery-single .photo-wrapper {
+      aspect-ratio: auto;
+    }
+
+    .gallery-single .photo-wrapper img {
+      height: auto;
+      max-height: 500px;
+    }
+
+    .gallery-multi {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .photo-wrapper {
+      aspect-ratio: 3 / 4;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .photo-wrapper:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    .photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .photo-wrapper:hover img {
+      transform: scale(1.03);
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(16, 42, 67, 0.92);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 20px;
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      object-fit: contain;
+    }
+
+    .candle-section {
+      background: var(--warm-50);
+      border-radius: 16px;
+      padding: 32px;
+      margin-top: 48px;
+    }
+
+    .candle-container-center {
+      text-align: center;
+      margin-bottom: 24px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .css-candle {
+      width: 32px;
+      height: 48px;
+      background: linear-gradient(#faefd7, #e8d0a9);
+      border-radius: 4px;
+      position: relative;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .css-candle::before {
+      content: "";
+      position: absolute;
+      top: -12px;
+      left: 14px;
+      width: 4px;
+      height: 12px;
+      background: #594a36;
+      border-radius: 2px;
+    }
+
+    .css-flame {
+      width: 14px;
+      height: 24px;
+      background: radial-gradient(ellipse at bottom, #ffeb3b, #ff9800);
+      border-radius: 50% 50% 35% 35%;
+      position: absolute;
+      top: -26px;
+      left: 9px;
+      animation: flicker 1.8s infinite ease-in-out alternate;
+      box-shadow: 0 0 10px rgba(255, 152, 0, 0.6), 0 0 20px rgba(255, 235, 59, 0.4);
+      transform-origin: bottom center;
+    }
+
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+      20% { transform: scale(1.1) rotate(2deg); opacity: 1; }
+      40% { transform: scale(0.95) rotate(-1deg); opacity: 0.8; }
+      60% { transform: scale(1.05) rotate(1deg); opacity: 1; }
+      80% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+      100% { transform: scale(0.98) rotate(2deg); opacity: 0.85; }
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .candle-count {
+      color: var(--warm-900);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--warm-300);
+      border-radius: 12px;
+      font-family: inherit;
+      margin-bottom: 12px;
+      background: var(--white);
+      transition: border-color 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--warm-500);
+      box-shadow: 0 0 0 3px rgba(212, 180, 131, 0.2);
+    }
+
+    .btn {
+      background: var(--primary-900);
+      color: var(--white);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      width: 100%;
+    }
+
+    .btn:hover { background: var(--primary-800); }
+    .btn:active { transform: scale(0.98); }
+
+    .candle-form-container {
+      max-width: 400px;
+      margin: 0 auto;
+      display: none;
+    }
+
+    .candle-form-container.active { display: block; }
+
+    .candle-messages {
+      margin-top: 28px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .candle-messages-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--primary-900);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .candle-entry {
+      background: var(--white);
+      border: 1px solid var(--warm-200);
+      border-left: 3px solid var(--warm-500);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      text-align: left;
+      animation: fadeIn 0.4s ease-out;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .candle-entry:hover {
+      transform: translateX(2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+
+    .candle-entry-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .candle-entry-icon {
+      font-size: 0.85rem;
+      line-height: 1;
+    }
+
+    .candle-entry-name {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--primary-900);
+    }
+
+    .candle-entry-time {
+      font-size: 0.75rem;
+      color: var(--warm-600);
+      margin-left: auto;
+    }
+
+    .candle-entry-message {
+      font-size: 0.9rem;
+      color: var(--primary-700);
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .candle-entry-notext {
+      font-size: 0.85rem;
+      color: var(--warm-500);
+      font-style: italic;
+    }
+
+    /* Guestbook Styles */
+    .guestbook-section {
+      margin-top: 60px;
+      text-align: left;
+    }
+
+    .guestbook-subtitle {
+      color: var(--warm-600);
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+
+    .guestbook-form {
+      background: var(--warm-50);
+      padding: 24px;
+      border-radius: 16px;
+      margin-bottom: 40px;
+      border: 1px solid var(--warm-200);
+    }
+
+    .textarea-wrapper {
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .guestbook-form textarea {
+      resize: vertical;
+      min-height: 100px;
+      margin-bottom: 4px;
+    }
+
+    .char-count {
+      font-size: 0.75rem;
+      color: var(--warm-500);
+      text-align: right;
+      display: block;
+    }
+
+    .guestbook-entry {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      border: 1px solid var(--warm-100);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      position: relative;
+    }
+   
+    .guestbook-entry::before {
+      content: "❝";
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      font-size: 3rem;
+      color: var(--warm-100);
+      font-family: serif;
+      line-height: 1;
+      z-index: 0;
+    }
+
+    .gb-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .gb-author {
+      font-weight: 700;
+      color: var(--primary-900);
+      font-size: 0.95rem;
+    }
+
+    .gb-date {
+      font-size: 0.8rem;
+      color: var(--warm-500);
+    }
+
+    .gb-message {
+      color: var(--primary-800);
+      line-height: 1.6;
+      font-size: 0.95rem;
+      position: relative;
+      z-index: 1;
+      white-space: pre-wrap;
+    }
+
+
+    /* Share Section */
+    .share-section {
+      margin-top: 48px;
+      text-align: center;
+    }
+
+    .share-section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+
+    .share-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      border: 1px solid var(--warm-300);
+      border-radius: 10px;
+      background: var(--white);
+      color: var(--primary-800);
+      font-size: 0.85rem;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .share-btn:hover {
+      background: var(--warm-100);
+      border-color: var(--warm-500);
+    }
+
+    .share-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .share-btn-label {
+      display: none;
+    }
+
+    @media (min-width: 480px) {
+      .share-btn-label {
+        display: inline;
+      }
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.85rem;
+      color: var(--warm-600);
+    }
+
+    .footer a {
+      color: var(--primary-700);
+      text-decoration: none;
+    }
+
+    .footer a:hover { text-decoration: underline; }
+
+    /* Password Gate */
+    .password-gate {
+      text-align: center;
+      padding: 60px 24px;
+    }
+
+    .password-gate .lock-icon {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+
+    .password-gate h2 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .password-gate .subtitle {
+      color: var(--warm-600);
+      font-size: 0.95rem;
+      margin-bottom: 32px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+    }
+
+    .password-gate .pw-form {
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .password-gate .pw-error {
+      color: #c53030;
+      font-size: 0.85rem;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .memorial-content {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (min-width: 600px) {
+      .gallery-multi {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px 12px 60px; }
+      .memorial-card { padding: 28px 16px; }
+      h1 { font-size: 1.75rem; }
+      .main-photo-container { width: 140px; height: 140px; }
+      .main-photo { border-width: 4px; }
+      .dates { font-size: 0.95rem; }
+      .biography { font-size: 0.95rem; }
+      .candle-section { padding: 24px 16px; }
+      .gallery-single .photo-wrapper img { max-height: 350px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="memorial-card">
+      
+      <!-- Password Gate (content is AES-GCM encrypted) -->
+      <div id="password-gate" class="password-gate">
+        <span class="lock-icon">🔒</span>
+        <h2>Private Memorial</h2>
+        <p class="subtitle">This memorial is password protected</p>
+        <div class="pw-form">
+          <input type="password" id="pw-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')unlockMemorial()" />
+          <button class="btn" onclick="unlockMemorial()" style="margin-top: 8px;">View Memorial</button>
+          <p id="pw-error" class="pw-error">Incorrect password. Please try again.</p>
+        </div>
+      </div>
+      <script type="application/json" id="encrypted-data">{"ciphertext":"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","salt":"Y3mwkjuSQBMsWkj0tYiIcw==","iv":"c5dWIzdDkWn+UZHm"}</script>
+      <div id="memorial-content" class="memorial-content" style="display:none"></div>
+      
+    </div>
+
+    
+    <div class="share-section">
+      <h2>Share This Memorial</h2>
+      <div class="share-buttons">
+        <a class="share-btn" id="share-facebook" href="#" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <span class="share-btn-label">Facebook</span>
+        </a>
+        <a class="share-btn" id="share-twitter" href="#" target="_blank" rel="noopener noreferrer" aria-label="Share on X">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          <span class="share-btn-label">X</span>
+        </a>
+        <a class="share-btn" id="share-whatsapp" href="#" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span class="share-btn-label">WhatsApp</span>
+        </a>
+        <a class="share-btn" id="share-linkedin" href="#" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          <span class="share-btn-label">LinkedIn</span>
+        </a>
+        <button class="share-btn" onclick="copyMemorialLink()" aria-label="Copy link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+          <span class="share-btn-label" id="copy-label">Copy Link</span>
+        </button>
+      </div>
+    </div>
+    
+
+    
+  </div>
+
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Full size photo" />
+  </div>
+
+  <script>
+    
+    // ── AES-GCM Decryption ─────────────────────────────────
+    function b64ToBytes(b64) {
+      return Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    }
+
+    async function sha256(str) {
+      const data = new TextEncoder().encode(str);
+      const hash = await crypto.subtle.digest('SHA-256', data);
+      return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function unlockMemorial() {
+      const input = document.getElementById('pw-input');
+      const password = input.value;
+      if (!password) return;
+
+      try {
+        const encData = JSON.parse(document.getElementById('encrypted-data').textContent);
+        const passwordHash = await sha256(password);
+
+        // Derive key from password hash using PBKDF2
+        const keyMaterial = await crypto.subtle.importKey(
+          'raw', new TextEncoder().encode(passwordHash), 'PBKDF2', false, ['deriveKey']
+        );
+        const key = await crypto.subtle.deriveKey(
+          { name: 'PBKDF2', salt: b64ToBytes(encData.salt), iterations: 100000, hash: 'SHA-256' },
+          keyMaterial,
+          { name: 'AES-GCM', length: 256 },
+          false,
+          ['decrypt']
+        );
+
+        // Decrypt content
+        const decrypted = await crypto.subtle.decrypt(
+          { name: 'AES-GCM', iv: b64ToBytes(encData.iv) },
+          key,
+          b64ToBytes(encData.ciphertext)
+        );
+
+        const html = new TextDecoder().decode(decrypted);
+        document.getElementById('password-gate').style.display = 'none';
+        document.getElementById('memorial-content').innerHTML = html;
+        document.getElementById('memorial-content').style.display = 'block';
+
+        // Cache unlock for this session
+        sessionStorage.setItem('qm_demo-premium', password);
+
+        // Load candle count now that memorial is visible
+        loadCandleCount();
+      } catch (e) {
+        // Decryption fails with wrong password (AES-GCM auth tag mismatch)
+        document.getElementById('pw-error').style.display = 'block';
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    // Auto-unlock if password was cached this session
+    (async function() {
+      const cached = sessionStorage.getItem('qm_demo-premium');
+      if (cached) {
+        document.getElementById('pw-input').value = cached;
+        await unlockMemorial();
+      }
+    })();
+    
+
+    // ── Lightbox ──────────────────────────────────────────
+    function openLightbox(src) {
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // ── Candle API ────────────────────────────────────────
+    const API_URL = 'http://localhost:3000/api/candles/demo-premium';
+
+    function toggleForm() {
+      const form = document.getElementById('candle-form');
+      const btn = document.getElementById('show-form-btn');
+      
+      form.classList.toggle('active');
+      
+      if (form.classList.contains('active')) {
+        btn.style.display = 'none';
+        document.getElementById('name').focus();
+      } else {
+        btn.style.display = 'inline-block';
+      }
+    }
+
+    async function submitCandle() {
+      const btn = document.getElementById('submit-btn');
+      const nameCtx = document.getElementById('name');
+      const msgCtx = document.getElementById('message');
+
+      const name = nameCtx.value.trim() || 'Anonymous';
+      const message = msgCtx.value.trim();
+
+      btn.innerText = 'Lighting...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lighter_name: name, message })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          const countSpan = document.getElementById('count');
+          countSpan.innerText = data.count || 1;
+
+          // Add the new candle to the list immediately
+          prependCandle(name, message);
+
+          nameCtx.value = '';
+          msgCtx.value = '';
+
+          btn.innerText = 'Candle Lit ✨';
+
+          setTimeout(() => {
+            toggleForm();
+            btn.innerText = 'Light Candle';
+            btn.disabled = false;
+          }, 1500);
+        } else {
+          throw new Error('Failed');
+        }
+
+      } catch (e) {
+        btn.innerText = 'Error';
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.innerText = 'Light Candle';
+        }, 2000);
+      }
+    }
+
+    function timeAgo(dateStr) {
+      const now = new Date();
+      const d = new Date(dateStr);
+      const diff = Math.floor((now - d) / 1000);
+      if (diff < 60) return 'just now';
+      if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+      if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+      if (diff < 2592000) return Math.floor(diff / 86400) + 'd ago';
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    function escText(s) {
+      const el = document.createElement('span');
+      el.textContent = s;
+      return el.innerHTML;
+    }
+
+    function renderCandle(c) {
+      const name = escText(c.lighter_name || 'Anonymous');
+      const time = timeAgo(c.created_at);
+      const msg = c.message
+        ? '<p class="candle-entry-message">' + escText(c.message) + '</p>'
+        : '<p class="candle-entry-notext">lit a candle</p>';
+      return '<div class="candle-entry">'
+        + '<div class="candle-entry-header">'
+        + '<span class="candle-entry-icon">🕯️</span>'
+        + '<span class="candle-entry-name">' + name + '</span>'
+        + '<span class="candle-entry-time">' + time + '</span>'
+        + '</div>'
+        + msg
+        + '</div>';
+    }
+
+    function renderCandles(candles) {
+      const container = document.getElementById('candle-messages');
+      if (!candles || candles.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+      container.innerHTML = '<h3 class="candle-messages-title">Messages of Remembrance</h3>'
+        + candles.map(renderCandle).join('');
+    }
+
+    function prependCandle(name, message) {
+      const container = document.getElementById('candle-messages');
+      const c = { lighter_name: name, message: message, created_at: new Date().toISOString() };
+      const html = renderCandle(c);
+      // Add title if first entry
+      if (!container.querySelector('.candle-messages-title')) {
+        container.innerHTML = '<h3 class="candle-messages-title">Messages of Remembrance</h3>';
+      }
+      const title = container.querySelector('.candle-messages-title');
+      title.insertAdjacentHTML('afterend', html);
+    }
+
+    // ── Guestbook API ─────────────────────────────────────
+    const GB_API_URL = 'http://localhost:3000/api/guestbook/demo-premium';
+    let gbPage = 1;
+    let gbLoading = false;
+
+    function updateCharCount() {
+      const el = document.getElementById('gb-message');
+      const count = document.getElementById('gb-char-count');
+      const len = el.value.length;
+      count.innerText = len + ' / 2,000';
+      if (len > 2000) count.style.color = 'red';
+      else count.style.color = '';
+    }
+
+    function renderGuestbookEntry(entry) {
+      if (!entry) return '';
+      const name = escText(entry.author_name);
+      const msg = escText(entry.message);
+      const date = new Date(entry.created_at).toLocaleDateString('en-US', {
+        year: 'numeric', month: 'long', day: 'numeric'
+      });
+      return '<div class="guestbook-entry">' +
+        '<div class="gb-header">' +
+          '<span class="gb-author">' + name + '</span>' +
+          '<span class="gb-date">' + date + '</span>' +
+        '</div>' +
+        '<div class="gb-message">' + msg + '</div>' +
+      '</div>';
+    }
+
+    async function loadGuestbook(page = 1) {
+      if (gbLoading) return;
+      gbLoading = true;
+      const btn = document.getElementById('gb-load-more');
+      if (btn) btn.innerHTML = 'Loading...';
+
+      try {
+        const res = await fetch(GB_API_URL + '?page=' + page);
+        const data = await res.json();
+        
+        if (data.entries && data.entries.length > 0) {
+          const html = data.entries.map(renderGuestbookEntry).join('');
+          const container = document.getElementById('gb-entries');
+          
+          if (page === 1) container.innerHTML = html;
+          else container.insertAdjacentHTML('beforeend', html);
+
+          // Show/hide load more button
+          const totalLoaded = page * data.pageSize;
+          const wrap = document.getElementById('gb-load-more-wrap');
+          if (data.total > totalLoaded) {
+            wrap.style.display = 'block';
+            gbPage = page;
+          } else {
+            wrap.style.display = 'none';
+          }
+        } else if (page === 1) {
+          document.getElementById('gb-entries').innerHTML = 
+            '<p style="text-align:center;color:var(--warm-500);font-style:italic;padding:20px;">No messages yet. Be the first to share a memory.</p>';
+          document.getElementById('gb-load-more-wrap').style.display = 'none';
+        }
+      } catch (e) {
+        console.error('Failed to load guestbook', e);
+      } finally {
+        gbLoading = false;
+        if (btn) btn.innerHTML = 'Load More';
+      }
+    }
+
+    function loadMoreGuestbook() {
+      loadGuestbook(gbPage + 1);
+    }
+
+    async function submitGuestbook() {
+      const nameEl = document.getElementById('gb-name');
+      const msgEl = document.getElementById('gb-message');
+      const btn = document.getElementById('gb-submit');
+
+      const name = nameEl.value.trim();
+      const message = msgEl.value.trim();
+
+      if (!name || !message) {
+        alert('Please enter your name and a message.');
+        return;
+      }
+      
+      if (message.length > 2000) {
+        alert('Message is too long (max 2,000 characters).');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerText = 'Posting...';
+
+      try {
+        const res = await fetch(GB_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ author_name: name, message })
+        });
+        
+        const data = await res.json();
+        
+        if (data.success) {
+          nameEl.value = '';
+          msgEl.value = '';
+          updateCharCount();
+          
+          btn.innerText = 'Message Posted';
+          
+          // Reload page 1 to show new message
+          await loadGuestbook(1);
+          
+          setTimeout(() => {
+            btn.disabled = false;
+            btn.innerText = 'Leave a Message';
+          }, 2000);
+        } else {
+          alert('Error: ' + (data.error || 'Failed to post message'));
+          btn.disabled = false;
+          btn.innerText = 'Leave a Message';
+        }
+      } catch (e) {
+        alert('Failed to connect. Please try again.');
+        btn.disabled = false;
+        btn.innerText = 'Leave a Message';
+      }
+    }
+
+    // Load initial candles
+    function loadCandleCount() {
+      fetch(API_URL)
+        .then(r => r.json())
+        .then(data => {
+          if(data.count) {
+            document.getElementById('count').innerText = data.count;
+          }
+          if(data.candles) {
+            renderCandles(data.candles);
+          }
+        })
+        .catch(e => console.error(e));
+      
+      // Also load guestbook
+      loadGuestbook(1);
+    }
+
+    // ── Share buttons ──────────────────────────────────
+    function initShareButtons() {
+      var url = encodeURIComponent(window.location.href);
+      var title = encodeURIComponent(document.title);
+      var el = function(id) { return document.getElementById(id); };
+      var fb = el('share-facebook'); if (fb) fb.href = 'https://www.facebook.com/sharer/sharer.php?u=' + url;
+      var tw = el('share-twitter'); if (tw) tw.href = 'https://twitter.com/intent/tweet?url=' + url + '&text=' + title;
+      var wa = el('share-whatsapp'); if (wa) wa.href = 'https://wa.me/?text=' + title + '%20' + url;
+      var li = el('share-linkedin'); if (li) li.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + url;
+    }
+    initShareButtons();
+
+    function copyMemorialLink() {
+      navigator.clipboard.writeText(window.location.href).then(function() {
+        var label = document.getElementById('copy-label');
+        if (label) { label.innerText = 'Copied!'; setTimeout(function() { label.innerText = 'Copy Link'; }, 2000); }
+      }).catch(function() {});
+    }
+
+    // Candle count loaded after unlock
+  </script>
+</body>
+</html>
