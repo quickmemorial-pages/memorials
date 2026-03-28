@@ -217,6 +217,36 @@
       margin-top: 48px;
     }
 
+    .donation-section {
+      margin-top: 48px;
+      padding: 28px 24px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(254, 252, 248, 1), rgba(250, 239, 215, 0.85));
+      border: 1px solid rgba(212, 180, 131, 0.35);
+      text-align: left;
+    }
+
+    .donation-description {
+      color: var(--primary-700);
+      margin: 10px 0 18px;
+      line-height: 1.7;
+    }
+
+    .donation-btn {
+      text-align: center;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .donation-disclaimer {
+      margin-top: 12px;
+      font-size: 0.82rem;
+      color: var(--warm-900);
+      line-height: 1.5;
+    }
+
     .candle-container-center {
       text-align: center;
       margin-bottom: 24px;
@@ -389,6 +419,30 @@
       font-style: italic;
     }
 
+    .remember-banner {
+      margin-top: 32px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(254, 252, 248, 1), rgba(250, 239, 215, 0.9));
+      border: 1px solid rgba(212, 180, 131, 0.35);
+      color: var(--primary-800);
+      text-align: left;
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .remember-banner strong {
+      color: var(--primary-900);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+    }
+
+    .remember-banner.archived {
+      background: linear-gradient(135deg, rgba(247, 243, 236, 1), rgba(239, 244, 234, 1));
+      border-color: rgba(133, 114, 73, 0.22);
+    }
+
     /* Guestbook Styles */
     .guestbook-section {
       margin-top: 60px;
@@ -408,6 +462,16 @@
       border-radius: 16px;
       margin-bottom: 40px;
       border: 1px solid var(--warm-200);
+    }
+
+    .guestbook-readonly {
+      margin-bottom: 24px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--warm-50);
+      border: 1px solid var(--warm-200);
+      color: var(--primary-700);
+      font-size: 0.95rem;
     }
 
     .textarea-wrapper {
@@ -613,6 +677,7 @@
       .main-photo { border-width: 4px; }
       .dates { font-size: 0.95rem; }
       .biography { font-size: 0.95rem; }
+      .donation-section { padding: 24px 18px; }
       .candle-section { padding: 24px 16px; }
       .gallery-single .photo-wrapper img { max-height: 350px; }
     }
@@ -666,11 +731,11 @@ If you are struggling with addiction, depression, or thoughts of suicide, please
 
 Support is here:
 
-Andy’s Man Club – Free peer-to-peer support groups for men (https://andysmanclub.co.uk/)
+Andy’s Man Club – Free peer-to-peer support groups for men - https://andysmanclub.co.uk 
 
 Samaritans – Call 116 123 (24/7, UK &amp; ROI)
 
-Mind – Mental health advice and support (https://www.mind.org.uk/)
+Mind – Mental health advice and support - https://www.mind.org.uk 
 
 Shout – Text 85258 for free, confidential support 
 
@@ -679,6 +744,10 @@ Reaching out is not weakness. It is strength 💜💚</div>
       <div class="gallery gallery-single"><div class="photo-wrapper" onclick="openLightbox('./photos/0.jpg')">
               <img src="./photos/0.jpg" alt="Photo 1 of Adam Wharton" loading="lazy" />
             </div></div>
+
+      
+
+      <div id="remember-archive-banner" class="remember-banner" aria-live="polite"></div>
 
       <div class="candle-section">
         <div class="candle-container-center">
@@ -706,16 +775,9 @@ Reaching out is not weakness. It is strength 💜💚</div>
 
       <div class="guestbook-section">
         <h2>📝 Guestbook</h2>
-        <p class="guestbook-subtitle">Share a memory or message of love</p>
+        <p class="guestbook-subtitle">Guestbook messages are view-only on the Remember plan</p>
 
-        <div id="gb-form" class="guestbook-form">
-          <input type="text" id="gb-name" placeholder="Your Name" maxlength="100" />
-          <div class="textarea-wrapper">
-            <textarea id="gb-message" rows="4" placeholder="Write a memory, a story, or a message for the family..." maxlength="2000" oninput="updateCharCount()"></textarea>
-            <span id="gb-char-count" class="char-count">0 / 2,000</span>
-          </div>
-          <button id="gb-submit" class="btn" onclick="submitGuestbook()">Leave a Message</button>
-        </div>
+        <div class="guestbook-readonly">Upgrade to Honor, Cherish, or Forever if you want visitors to leave guestbook messages.</div>
 
         <div id="gb-entries" class="guestbook-entries"></div>
         <div id="gb-load-more-wrap" style="text-align:center;margin-top:16px;display:none;">
@@ -754,9 +816,6 @@ Reaching out is not weakness. It is strength 💜💚</div>
     </div>
     
 
-    <footer class="footer">
-             <a href="https://quickmemorial.com" target="_blank" rel="noopener">Permanently hosted by QuickMemorial</a>
-           </footer>
   </div>
 
   <div id="lightbox" class="lightbox" onclick="closeLightbox()">
@@ -781,6 +840,37 @@ Reaching out is not weakness. It is strength 💜💚</div>
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeLightbox();
     });
+
+    function getMemorialAuthHeaders() {
+      const headers = {};
+      
+      return headers;
+    }
+
+    function updateRememberArchiveBanner() {
+      const banner = document.getElementById('remember-archive-banner');
+      if (!banner) return;
+
+      const createdAt = new Date("2026-03-07T16:04:33.793908+00:00");
+      const archiveAt = new Date(createdAt.getTime() + 60 * 24 * 60 * 60 * 1000);
+      const msRemaining = archiveAt.getTime() - Date.now();
+
+      banner.style.display = 'flex';
+
+      if (msRemaining <= 0) {
+        banner.classList.add('archived');
+        banner.innerHTML =
+          '<strong>Archive preview</strong>' +
+          '<span>This Remember memorial is now in permanent archive preview mode. Visitors can still view the page and light candles, but guestbook posting remains disabled.</span>';
+        return;
+      }
+
+      const daysRemaining = Math.ceil(msRemaining / (24 * 60 * 60 * 1000));
+      banner.classList.remove('archived');
+      banner.innerHTML =
+        '<strong>Remember plan active</strong>' +
+        '<span>You have full Remember plan access for ' + daysRemaining + ' more day' + (daysRemaining === 1 ? '' : 's') + ' before this memorial moves to archive preview mode.</span>';
+    }
 
     // ── Candle API ────────────────────────────────────────
     const API_URL = 'https://www.quickmemorial.com/api/candles/eaad6311-182a-4ddc-9eb6-ad748930c8c4';
@@ -813,7 +903,7 @@ Reaching out is not weakness. It is strength 💜💚</div>
       try {
         const res = await fetch(API_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', ...getMemorialAuthHeaders() },
           body: JSON.stringify({ lighter_name: name, message })
         });
 
@@ -941,7 +1031,10 @@ Reaching out is not weakness. It is strength 💜💚</div>
       if (btn) btn.innerHTML = 'Loading...';
 
       try {
-        const res = await fetch(GB_API_URL + '?page=' + page);
+        const res = await fetch(GB_API_URL + '?page=' + page, {
+          headers: getMemorialAuthHeaders()
+        });
+        if (!res.ok) throw new Error('Guestbook request failed');
         const data = await res.json();
         
         if (data.entries && data.entries.length > 0) {
@@ -1001,7 +1094,7 @@ Reaching out is not weakness. It is strength 💜💚</div>
       try {
         const res = await fetch(GB_API_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', ...getMemorialAuthHeaders() },
           body: JSON.stringify({ author_name: name, message })
         });
         
@@ -1035,8 +1128,11 @@ Reaching out is not weakness. It is strength 💜💚</div>
 
     // Load initial candles
     function loadCandleCount() {
-      fetch(API_URL)
-        .then(r => r.json())
+      fetch(API_URL, { headers: getMemorialAuthHeaders() })
+        .then(r => {
+          if (!r.ok) throw new Error('Candle request failed');
+          return r.json();
+        })
         .then(data => {
           if(data.count) {
             document.getElementById('count').innerText = data.count;
@@ -1075,6 +1171,7 @@ Reaching out is not weakness. It is strength 💜💚</div>
       fetch('https://www.quickmemorial.com/api/views/eaad6311-182a-4ddc-9eb6-ad748930c8c4', { method: 'POST' }).catch(function() {});
     }
 
+    updateRememberArchiveBanner();
     loadCandleCount();
     recordPageview();
   </script>
